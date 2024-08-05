@@ -1,0 +1,24 @@
+Browser -> Server
+  POST https://studies.cs.helsinki.fi/exampleapp/new_note
+Server -> Browser
+  302 redirect browser back to Notes page
+
+Browser -> Server
+  GET https://studies.cs.helsinki.fi/exampleapp/notes
+Server -> Browser
+  HTML Document
+
+Browser -> Server
+  POST https://studies.cs.helsinki.fi/exampleapp/main.css
+Server -> Browser
+  CSS file
+
+Browser -> Server
+  POST https://studies.cs.helsinki.fi/exampleapp/main.js
+Server -> Browser
+  JavaScript file
+
+Browser -> Server
+  POST https://studies.cs.helsinki.fi/exampleapp/data.json
+Server -> Browser
+  data from JSON file
