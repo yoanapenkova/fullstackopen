@@ -27,6 +27,22 @@ const App = () => {
     setAll(all + 1)
   }
 
+  const DisplayAverage = () => {
+    if (all == 0){
+      return 0;
+    } else {
+      return (good * 1 + neutral * 0 + bad * -1)/all;
+    }
+  }
+
+  const DisplayPositive = () => {
+    if (all == 0){
+      return 0;
+    } else {
+      return good/all * 100;
+    }
+  }
+
   return (
     <div>
       <h3>give feedback</h3>
@@ -40,8 +56,8 @@ const App = () => {
         neutral {neutral} <br></br>
         bad {bad} <br></br>
         all {all} <br></br>
-        average {(good * 1 + neutral * 0 + bad * -1)/all} <br></br>
-        positive {(good/all) * 100} %
+        average <DisplayAverage/> <br></br>
+        positive <DisplayPositive/> %
       </p>
     </div>
   )
