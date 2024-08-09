@@ -2,24 +2,24 @@ import { useState } from 'react'
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
-// a proper place to define a component
-const Statistics = ({good, neutral, bad, all}) => {
-  
-  const DisplayAverage = () => {
-    if (all == 0){
-      return 0;
-    } else {
-      return (good * 1 + neutral * 0 + bad * -1)/all;
-    }
+const StatisticLine = ({text, value}) => {
+  if(text == 'positive') {
+    return (
+      <div>
+        {text} {value} %
+      </div>
+    )
   }
 
-  const DisplayPositive = () => {
-    if (all == 0){
-      return 0;
-    } else {
-      return good/all * 100;
-    }
-  }
+  return (
+    <div>
+      {text} {value}
+    </div>
+  )
+}
+
+// a proper place to define a component
+const Statistics = ({good, neutral, bad, all}) => {
 
   if (all == 0){
     return (
@@ -35,14 +35,12 @@ const Statistics = ({good, neutral, bad, all}) => {
   return (
     <div>
       <h3>statistics</h3>
-      <p>
-        good {good} <br></br>
-        neutral {neutral} <br></br>
-        bad {bad} <br></br>
-        all {all} <br></br>
-        average {(good * 1 + neutral * 0 + bad * -1)/all} <br></br>
-        positive {good/all * 100} %
-      </p>
+      <StatisticLine text='good' value={good} />
+      <StatisticLine text='neutral' value={neutral} />
+      <StatisticLine text='bad' value={bad} />
+      <StatisticLine text='all' value={all} />
+      <StatisticLine text='average' value={(good * 1 + neutral * 0 + bad * -1)/all} /> 
+      <StatisticLine text='positive' value={good/all * 100} />
     </div>
   )
 }
