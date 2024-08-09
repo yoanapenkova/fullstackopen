@@ -2,6 +2,40 @@ import { useState } from 'react'
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
+// a proper place to define a component
+const Statistics = ({good, neutral, bad, all}) => {
+  
+  const DisplayAverage = () => {
+    if (all == 0){
+      return 0;
+    } else {
+      return (good * 1 + neutral * 0 + bad * -1)/all;
+    }
+  }
+
+  const DisplayPositive = () => {
+    if (all == 0){
+      return 0;
+    } else {
+      return good/all * 100;
+    }
+  }
+  
+  return (
+    <div>
+      <h3>statistics</h3>
+      <p>
+        good {good} <br></br>
+        neutral {neutral} <br></br>
+        bad {bad} <br></br>
+        all {all} <br></br>
+        average <DisplayAverage/> <br></br>
+        positive <DisplayPositive/> %
+      </p>
+    </div>
+  )
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -27,22 +61,6 @@ const App = () => {
     setAll(all + 1)
   }
 
-  const DisplayAverage = () => {
-    if (all == 0){
-      return 0;
-    } else {
-      return (good * 1 + neutral * 0 + bad * -1)/all;
-    }
-  }
-
-  const DisplayPositive = () => {
-    if (all == 0){
-      return 0;
-    } else {
-      return good/all * 100;
-    }
-  }
-
   return (
     <div>
       <h3>give feedback</h3>
@@ -50,15 +68,7 @@ const App = () => {
       <Button onClick={handleNeutral} text='neutral' /> 
       <Button onClick={handleBad} text='bad' />
 
-      <h3>statistics</h3>
-      <p>
-        good {good} <br></br>
-        neutral {neutral} <br></br>
-        bad {bad} <br></br>
-        all {all} <br></br>
-        average <DisplayAverage/> <br></br>
-        positive <DisplayPositive/> %
-      </p>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
     </div>
   )
 }
