@@ -20,6 +20,17 @@ const Statistics = ({good, neutral, bad, all}) => {
       return good/all * 100;
     }
   }
+
+  if (all == 0){
+    return (
+      <div>
+        <h3>statistics</h3>
+        <p>
+          No feedback given
+        </p>
+      </div>
+    )
+  }
   
   return (
     <div>
@@ -29,8 +40,8 @@ const Statistics = ({good, neutral, bad, all}) => {
         neutral {neutral} <br></br>
         bad {bad} <br></br>
         all {all} <br></br>
-        average <DisplayAverage/> <br></br>
-        positive <DisplayPositive/> %
+        average {(good * 1 + neutral * 0 + bad * -1)/all} <br></br>
+        positive {good/all * 100} %
       </p>
     </div>
   )
