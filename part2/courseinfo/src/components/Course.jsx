@@ -5,7 +5,7 @@ const Course = ({course}) => {
     return (
       <div>
         <Header name={course.name}/>
-        <Content content={course.parts}/>
+        <Content parts={course.parts}/>
       </div>
     )
   }
