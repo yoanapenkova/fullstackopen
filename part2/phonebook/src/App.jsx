@@ -42,6 +42,12 @@ const App = () => {
           ));
           console.log(`Person with ID ${personDB.id} updated successfully`)
         })
+        .catch(error => {
+          setNotificationMessage(
+            `Information of ${newName} has already been removed from server.`
+          )
+          setClassName('error')
+        })
       }
     } else {
       const personObject = {
