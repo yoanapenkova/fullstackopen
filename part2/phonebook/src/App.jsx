@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 import personService from './services/persons'
 
@@ -11,6 +12,9 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+
+  const [notificationMessage, setNotificationMessage] = useState(null)
+  const [className, setClassName] = useState(null)
 
   useEffect(() => {
     personService
@@ -52,6 +56,11 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+
+        setNotificationMessage(
+          `Added ${newName}`
+        )
+        setClassName('success')
     }
   }
 
@@ -82,6 +91,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notificationMessage} className={className}/>
+      <p>Filter shown with:</p>
       <Filter
           filter={newFilter}
           functionOnChange={handleFilterChange}
