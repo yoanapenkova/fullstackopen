@@ -47,7 +47,7 @@ const App = (props) => {
   )
   */
 
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(null)
   const [newNote, setNewNote] = useState(
     'a new note...'
   )
@@ -107,6 +107,10 @@ const App = (props) => {
         setNotes(notes.concat(returnedNote))
         setNewNote('')
       })
+  }
+
+  if (!notes) { 
+    return null 
   }
 
   return (
