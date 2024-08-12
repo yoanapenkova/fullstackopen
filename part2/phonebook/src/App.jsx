@@ -24,7 +24,21 @@ const App = () => {
     event.preventDefault()
 
     if (persons.some(person => person.name == newName)){
-      alert(newName + ' is already added to the phonebook.')
+      let personDB = persons.find(person => person.name == newName)
+      const confirmed = window.confirm(newName + " is already added to the phonebook, replace the old number with a new one?");
+      
+      if (confirmed) {
+        const updatedPerson = { ...personDB, number: newNumber };
+
+        personService
+        .update(personDB.id, updatedPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => 
+            person.id !== personDB.id ? person : returnedPerson
+          ));
+          console.log(`Person with ID ${personDB.id} updated successfully`)
+        })
+      }
     } else {
       const personObject = {
         name: newName,
