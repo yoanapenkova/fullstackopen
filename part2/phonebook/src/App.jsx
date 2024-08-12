@@ -53,6 +53,18 @@ const App = () => {
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
 
+  const deletePerson = id => {
+    personService
+      .deletePerson(id)
+      .then(() => {
+        setPersons(persons.filter(person => person.id !== id))
+        console.log(`Person with ID ${id} deleted successfully`)
+      })
+      .catch(error => {
+        alert(`The person with ID '${id}' does not exist`)
+      })
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -69,9 +81,7 @@ const App = () => {
         numberInputFunction={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons
-          persons={personsToShow}
-      />
+      <Persons persons={personsToShow} onDelete={deletePerson} />
     </div>
   )
 }
